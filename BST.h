@@ -174,11 +174,38 @@ public:
 		cout << "TODO: Implement printLevelOrder" << endl;
 		Node<T>* current = this->_root;
 		int x = 0;
-		int pos = 0;
-		string line [height()];
-		while (x==1){
-			
+		int pos = 1;
+		string array [height()];
+		array[pos] = std::to_string(current->value);
+		while (x==0){
+			if (!current->left == NULL){
+				pos += 1;
+				current = current->left;
+				array[pos] = std::to_string(current->value);
+			}
+			else if (!current->right == NULL){
+				pos += 1;
+				current = current->right;
+				array[pos] = std::to_string(current->value);
+			}
+			else if (current->right == NULL && current->left == NULL){
+				pos -= 1;
+				current = current->parent;
+				if (!current->left == NULL){
+					delete current->left;
+				}
+				else if (!current->right == NULL){
+					delete current->right;
+				}
+			}
+			else if (current == NULL){
+				x = 1;
+			}
 		}
+		for (int i = 1; i <= sizeof(array); i++){
+			cout << array[i] << endl;
+		}
+		return;
 	}
 
 	int nodesCount() {
@@ -200,7 +227,7 @@ public:
 		while (x==0){
 			if (!current->right == NULL){
 				current = current->right;
-				path = path + " " + to_string(current->value);
+				path = path + " " + std::to_string(current->value);
 			}
 			else{
 				return path;
