@@ -1,4 +1,4 @@
-#ifndef __BST_H
+/#ifndef __BST_H
 #define __BST_H
 
 #include <iostream>
@@ -133,7 +133,23 @@ public:
 	 * TODO: Implement Destructor
 	 */
 	~BST() {
-	    cout << "TODO: Implement Destructor" << endl;
+		Node<T>* current = this->_root;
+		int x = 0;
+		while (x==0){
+			if (current == NULL){
+				x = 1;
+			}
+			if (!current->left == NULL){
+				current = current->left;
+			}
+			else if (!current->right == NULL){
+				current = current->right;
+			}
+			else if (current->right == NULL && current->left == NULL){
+				delete Node;
+				current = _root;
+			}
+		}
 	}
 
 	/* Public API */
@@ -156,6 +172,13 @@ public:
 	 */
 	void printLevelOrder() {
 		cout << "TODO: Implement printLevelOrder" << endl;
+		Node<T>* current = this->_root;
+		int x = 0;
+		int pos = 0;
+		string line [height()];
+		while (x==1){
+			
+		}
 	}
 
 	int nodesCount() {
@@ -171,7 +194,18 @@ public:
 	 * TODO: Implement printMaxPath
 	 */
 	void printMaxPath() {
-		cout << "TODO: Implement printMaxPath" << endl;
+		Node<T>* current = this->_root;
+		int x = 0;
+		string path = path + to_string(current->value);
+		while (x==0){
+			if (!current->right == NULL){
+				current = current->right;
+				path = path + " " + to_string(current->value);
+			}
+			else{
+				return path;
+			}
+		}
 	}
 
 	bool deleteValue(T value) {
@@ -183,7 +217,22 @@ public:
 	 * TODO: Implement contains
 	 */
 	bool contains(T value) {
-	    cout << "TODO: Implement contains" << endl;
+		Node<T>* current = this->_root;
+		int x = 0;
+		while (x == 0){
+			if (current->value == value){
+				return true;
+			}
+			else if (current->value > value){
+				current = current->left;
+			}
+			else if (current->value < value){
+				current = current->right;
+			}
+			else{
+				return false;
+			}
+		}
 		return numeric_limits<T>::min();
 	}
 };
